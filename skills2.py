@@ -244,8 +244,19 @@ def word_length(words):
         [(1, ['a']), (2, ['ok', 'an']), (3, ['day']), (5, ['apple'])]
 
     """
+    word_dict = {}
 
-    return []
+    for word in words:
+        if len(word) in word_dict:
+
+            word_dict[len(word)] =  word_dict[len(word)] + [word]
+        else:
+            word_dict[len(word)] =  [word]
+
+
+    print word_dict
+
+    return word_dict
 
 
 def adv_word_length_sorted_words(words):
