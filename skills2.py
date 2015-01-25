@@ -93,7 +93,7 @@ def common_items(list1, list2):
 
     (And the order of which has the multiples shouldn't matter, either):
 
-        >>> sorted(common_items([1, 1, 2, 2], [1, 2, 3, 4]))
+        >>> sorted(common_items([1, 2, 2], [1, 1, 2, 3, 4]))
         [1, 1, 2, 2]
 
     """
@@ -102,50 +102,14 @@ def common_items(list1, list2):
     list1_sorted = sorted(list1)
     list2_sorted = sorted(list2)
 
-    if len(list1_sorted) < len(list2_sorted):
-        shorter_list = list1_sorted
 
-    else:
-        shorter_list = list2_sorted
+    for number in list1_sorted:
+        for num in list2_sorted:
+            if number == num:
+                common_items_list.append(number)
 
-
-    for number in shorter_list:
-        if list1_sorted[0] == list2_sorted[0]:
-            common_items_list.append(list1_sorted[0])
-            list1_sorted.remove(list1_sorted[0])
-            list2_sorted.remove(list2_sorted[0])
-
-        else:
-            for item in common_items_list:
-
-                if item == list1_sorted[0]:
-                    common_items_list.append(list1_sorted[0])
-                    list1_sorted.remove(list1_sorted[0])
-                if item == list2_sorted[0]:
-                    common_items_list.append(list1_sorted[0])
-                    list2_sorted.remove(list2_sorted[0])
-                else:
-                    list1_sorted.remove(list1_sorted[0])
-                    list2_sorted.remove(list2_sorted[0])
-
-
-    # for i in range(len(shorter_list)):
-    #     if list1_sorted[i] == list2_sorted[i]:
-    #         common_items_list.append(list1_sorted[i])
-    #         list1_sorted.remove(list1_sorted[i])
-    #         list2_sorted.remove(list2_sorted[i])
-
-        # else:
-        #     if list1_sorted[i] == 
-        print common_items_list
-
-
-#having issues, come back later
-
-
-
-
-    # return []
+    return common_items_list
+    
 
 
 def unique_common_items(list1, list2):
@@ -170,7 +134,17 @@ def unique_common_items(list1, list2):
 
     """
 
-    return []
+    common_items_list = []
+
+    for number in list1:
+        for num in list2:
+            if number == num:
+                common_items_list.append(number)
+
+    common_items_list = set(common_items_list)
+
+
+    return common_items_list
 
 
 def sum_zero(list1):
@@ -198,8 +172,20 @@ def sum_zero(list1):
         [[-2, 2], [-1, 1], [0, 0]]
 
     """
+    sum_zero = []
 
-    return []
+
+    for number in list1:
+        for num in list1:
+            if number + num == 0:
+                if [number,num] in sum_zero or [num, number] in sum_zero:
+                    continue
+                else:
+                    sum_zero.append([number, num])
+
+
+
+    return sum_zero
 
 
 def find_duplicates(words):
@@ -273,8 +259,23 @@ def adv_word_length_sorted_words(words):
         [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
 
     """
+    word_dict = {}
+    word_list = []
 
-    return []
+    for word in words:
+        word_len = len(word)
+        if word_len in word_dict:
+            word_dict[word_len] = word_dict[word_len] + [word]
+        else:
+            word_dict[word_len] = [word]
+
+    for k,v in word_dict.items():
+        word_list.append([k,v])
+
+    word_list.sort()
+
+
+    return word_list
 
 
 def pirate_talk(phrase):
@@ -320,7 +321,21 @@ def pirate_talk(phrase):
 
     """
 
-    return ""
+    final_string = ""
+
+    pirate_dict = { 'my':'me', 'sir' : "matey", "hotel" : "fleabag", 'student' : "swabbie", "boy" : "matey", 'man':'matey'}
+
+    phrase = phrase.strip()
+    word_list = phrase.split()
+
+    for word in word_list:
+        if word in pirate_dict:
+            word = pirate_dict[word]
+
+        final_string = final_string + " " + word
+
+
+    return final_string
 
 
 ##############################################################################
